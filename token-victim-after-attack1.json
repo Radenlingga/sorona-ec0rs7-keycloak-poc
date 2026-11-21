@@ -1,0 +1,50 @@
+{
+ "exp": 1795196128,
+ "iat": 1795195828,
+ "jti": "onrtro:a8982b4f-d0d8-8c51-0b09-07bc49431583",
+ "iss": "http://127.0.0.1:8080/realms/k1reply",
+ "aud": [
+  "http://127.0.0.1:8080/admin/realms/k1reply",
+  "realm-management"
+ ],
+ "sub": "e95ed34c-af1c-4778-bb5c-6d7535ff88dd",
+ "typ": "Bearer",
+ "azp": "portal",
+ "sid": "nB5a-xlUBqUJMa2Zt9EkMWAq",
+ "acr": "1",
+ "resource_access": {
+  "realm-management": {
+   "roles": [
+    "view-identity-providers",
+    "view-realm",
+    "manage-organizations",
+    "manage-identity-providers",
+    "impersonation",
+    "realm-admin",
+    "create-client",
+    "manage-users",
+    "query-realms",
+    "view-authorization",
+    "query-clients",
+    "query-users",
+    "manage-events",
+    "manage-realm",
+    "view-organizations",
+    "view-events",
+    "view-users",
+    "view-clients",
+    "manage-authorization",
+    "manage-clients",
+    "query-groups",
+    "query-organizations"
+   ]
+  }
+ },
+ "scope": "profile kc-admin-api email",
+ "email_verified": true,
+ "name": "victim Test",
+ "preferred_username": "victim",
+ "given_name": "victim",
+ "family_name": "Test",
+ "email": "victim@example.local"
+}

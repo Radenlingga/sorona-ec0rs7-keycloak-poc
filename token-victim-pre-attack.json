@@ -1,0 +1,19 @@
+{
+ "exp": 1795196128,
+ "iat": 1795195828,
+ "jti": "onrtro:a4cca050-7c24-befb-4eec-d9715403541e",
+ "iss": "http://127.0.0.1:8080/realms/k1reply",
+ "aud": "http://127.0.0.1:8080/admin/realms/k1reply",
+ "sub": "e95ed34c-af1c-4778-bb5c-6d7535ff88dd",
+ "typ": "Bearer",
+ "azp": "portal",
+ "sid": "Zkk96Nk0Ld-JWaoJLUXQMG5g",
+ "acr": "1",
+ "scope": "profile kc-admin-api email",
+ "email_verified": true,
+ "name": "victim Test",
+ "preferred_username": "victim",
+ "given_name": "victim",
+ "family_name": "Test",
+ "email": "victim@example.local"
+}
