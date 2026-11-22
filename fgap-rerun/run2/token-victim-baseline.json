@@ -1,0 +1,18 @@
+{
+ "exp": 1795361708,
+ "iat": 1795361408,
+ "jti": "onrtro:a89760bb-43a8-8f78-40d8-a8d8f46e94f1",
+ "iss": "http://127.0.0.1:8080/realms/k1fgap2",
+ "sub": "476f37f0-a5db-42c4-8808-123c99e8be33",
+ "typ": "Bearer",
+ "azp": "portal",
+ "sid": "xUS3lgvk05AXy83nqIfZZKU2",
+ "acr": "1",
+ "scope": "email profile",
+ "email_verified": true,
+ "name": "victim Test",
+ "preferred_username": "victim",
+ "given_name": "victim",
+ "family_name": "Test",
+ "email": "victim@example.local"
+}

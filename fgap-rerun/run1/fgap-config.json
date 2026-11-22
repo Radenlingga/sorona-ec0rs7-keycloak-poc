@@ -1,0 +1,152 @@
+{
+ "realm": "k1fgap1",
+ "adminPermissionsEnabled": true,
+ "adminPermissionsClient": "admin-permissions",
+ "adminPermissionsClientUuid": "4efb3ec3-c757-4d57-8a1c-8e4a2a37d887",
+ "resources": [
+  {
+   "id": "8dfd7c12-f816-43c2-ae8e-57dcf243b02d",
+   "name": "Clients",
+   "type": "Clients"
+  },
+  {
+   "id": "9d530aed-e257-4d5c-9520-16e8a0569100",
+   "name": "Groups",
+   "type": "Groups"
+  },
+  {
+   "id": "f51a2be8-7b84-495a-a9ab-d27825236b74",
+   "name": "Organizations",
+   "type": "Organizations"
+  },
+  {
+   "id": "ebc7042d-366b-45a3-b6b6-4192957681c0",
+   "name": "Roles",
+   "type": "Roles"
+  },
+  {
+   "id": "866d8d32-c799-4161-b669-0e62cc432ee1",
+   "name": "Users",
+   "type": "Users"
+  }
+ ],
+ "scopes": [
+  {
+   "id": "026309e1-571c-401e-a2df-5ee84f35cdfd",
+   "name": "delegate"
+  },
+  {
+   "id": "20b04a56-dd1a-4b3d-b6f5-56f1f96ad5fa",
+   "name": "delegate-members"
+  },
+  {
+   "id": "68be44d3-67b8-49ec-895e-caa22d58f7b3",
+   "name": "impersonate"
+  },
+  {
+   "id": "e97d5afb-6e7b-4676-aba2-aea22168bb02",
+   "name": "impersonate-members"
+  },
+  {
+   "id": "415f9d2f-79ba-4574-a507-4b01d9bc8de1",
+   "name": "manage"
+  },
+  {
+   "id": "9967fbdd-b726-4b6e-907b-82c11877f887",
+   "name": "manage-group-membership"
+  },
+  {
+   "id": "6f5db68f-ba51-486e-beaa-907cb48039ab",
+   "name": "manage-members"
+  },
+  {
+   "id": "6f61208a-b11d-4db0-aa8e-8aab13d95e39",
+   "name": "manage-membership"
+  },
+  {
+   "id": "fc226cab-1502-488a-8820-62058351848b",
+   "name": "manage-membership-of-members"
+  },
+  {
+   "id": "40ca48d7-83df-41ba-a964-b02932219be6",
+   "name": "map-role"
+  },
+  {
+   "id": "f24bfe01-b99c-42f3-8195-0cf8d263c2cb",
+   "name": "map-role-client-scope"
+  },
+  {
+   "id": "10c32883-dc88-46bc-a3f8-95f88dd7d157",
+   "name": "map-role-composite"
+  },
+  {
+   "id": "80d33276-57d2-410f-896d-1437c6b68923",
+   "name": "map-roles"
+  },
+  {
+   "id": "f1a00d0b-2f27-4894-9c21-fb6fec68969d",
+   "name": "map-roles-client-scope"
+  },
+  {
+   "id": "0e5030d4-5ef0-4d70-a1d8-de2a7903f311",
+   "name": "map-roles-composite"
+  },
+  {
+   "id": "c44753ff-425b-4f7e-8352-b44e4ed380ea",
+   "name": "reset-password"
+  },
+  {
+   "id": "8f27b64f-aede-4028-9c1d-444874d79103",
+   "name": "view"
+  },
+  {
+   "id": "0e60fe09-aaea-476f-8e4a-cb66a141cd7f",
+   "name": "view-members"
+  }
+ ],
+ "grant": {
+  "userPolicy": {
+   "id": "4218ec70-97ba-4cc4-81a4-d3b8f6fd7f21",
+   "name": "delegated-admin-user-policy",
+   "description": "FGAP user policy for user 'delegated'",
+   "type": "user",
+   "logic": "POSITIVE",
+   "decisionStrategy": "UNANIMOUS",
+   "users": [
+    "1ed057b6-0d12-4409-8239-1582bf505ce1"
+   ]
+  },
+  "scopePermission": {
+   "id": "63cced85-ad8c-448a-9423-cea617c7466d",
+   "name": "delegated-manage-clients",
+   "description": "FGAP delegation: manage clients only",
+   "type": "scope",
+   "policies": [
+    "4218ec70-97ba-4cc4-81a4-d3b8f6fd7f21"
+   ],
+   "resources": [
+    "8dfd7c12-f816-43c2-ae8e-57dcf243b02d"
+   ],
+   "scopes": [
+    "0e5030d4-5ef0-4d70-a1d8-de2a7903f311",
+    "8f27b64f-aede-4028-9c1d-444874d79103",
+    "415f9d2f-79ba-4574-a507-4b01d9bc8de1",
+    "f1a00d0b-2f27-4894-9c21-fb6fec68969d",
+    "80d33276-57d2-410f-896d-1437c6b68923"
+   ],
+   "logic": "POSITIVE",
+   "decisionStrategy": "UNANIMOUS",
+   "resourceType": "Clients"
+  },
+  "resourceName": "Clients",
+  "scopesGranted": [
+   "view",
+   "manage",
+   "map-roles",
+   "map-roles-client-scope",
+   "map-roles-composite"
+  ],
+  "subjectUser": "delegated",
+  "subjectUserId": "1ed057b6-0d12-4409-8239-1582bf505ce1"
+ }
+}
